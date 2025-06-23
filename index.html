@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Boogly Boggly ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffeef8, #f0e6ff, #e6f3ff);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: #8b5a8c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #6a4c93;
+            font-style: italic;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 1.5rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.6; }
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h2 {
+            color: #8b5a8c;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #ff69b4, #8b5a8c);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #ffffff, #f8f4ff);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            border-color: #ff69b4;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+        }
+
+        .card h3 {
+            color: #6a4c93;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+        }
+
+        .card p {
+            color: #5a5a5a;
+            font-size: 1.1rem;
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .memory-card {
+            background: linear-gradient(135deg, #ffeef8, #e6f3ff);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .memory-card:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        .memory-date {
+            color: #8b5a8c;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .memory-text {
+            color: #6a4c93;
+            font-style: italic;
+        }
+
+        .quote-section {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #6a4c93;
+            font-style: italic;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .quote-section::before,
+        .quote-section::after {
+            content: '"';
+            font-size: 3rem;
+            color: #ff69b4;
+            opacity: 0.5;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .edit-hint {
+            background: rgba(255, 235, 59, 0.1);
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            color: #795548;
+            font-style: italic;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="heartsContainer"></div>
+    
+    <div class="container">
+        <header class="header pulse">
+            <h1>The Boogly Boggly</h1>
+            <p>All the wonderful things that make you amazing ✨</p>
+        </header>
+
+        <section class="section">
+            <h2>🌟 What Makes You Special</h2>
+            <div class="edit-hint">💡 Customize this section with her unique qualities and what you love about her</div>
+            <div class="grid">
+                <div class="card">
+                    <h3><span class="card-icon">💖</span>Your Beautiful Heart</h3>
+                    <p>Your kindness and compassion light up every room you enter. The way you care for others is truly inspiring.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">✨</span>Your Amazing Mind</h3>
+                    <p>Your intelligence and creativity never cease to amaze me. You see the world in such a beautiful way.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🌈</span>Your Joyful Spirit</h3>
+                    <p>Your laughter is contagious and your smile can brighten the darkest days. You bring joy wherever you go.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">💝</span>Your Loving Nature</h3>
+                    <p>The love you give so freely makes everyone around you feel cherished and valued. You're a treasure.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎨 Things You Love</h2>
+            <div class="edit-hint">💡 Add her favorite hobbies, activities, foods, places, etc.</div>
+            <div class="grid">
+                <div class="card">
+                    <h3><span class="card-icon">📚</span>Books & Reading</h3>
+                    <p>Curled up with a good book, lost in different worlds and stories that inspire and delight you.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🎵</span>Music</h3>
+                    <p>The melodies that move your soul and the songs that make you dance like nobody's watching.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🌸</span>Nature & Gardens</h3>
+                    <p>Finding peace among flowers, feeling the sun on your face, and appreciating life's simple beauties.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🍰</span>Sweet Treats</h3>
+                    <p>Those little indulgences that bring a smile - whether it's chocolate, ice cream, or homemade desserts.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🎨</span>Creative Arts</h3>
+                    <p>Expressing yourself through art, crafts, or any creative outlet that lets your imagination soar.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">👫</span>Time with Loved Ones</h3>
+                    <p>Precious moments shared with family and friends, creating memories that last a lifetime.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>💕 Beautiful Memories</h2>
+            <div class="edit-hint">💡 Replace with your actual special moments and dates</div>
+            <div class="memories-grid">
+                <div class="memory-card">
+                    <div class="memory-date">July 6, 2024</div>
+                    <div class="memory-text">Our perfect wedding day - the beginning of our forever ✨</div>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-date">First Date</div>
+                    <div class="memory-text">When I knew you were something special 💖</div>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-date">First "I Love You"</div>
+                    <div class="memory-text">The moment my heart knew it was home 🏠</div>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-date">December 2024</div>
+                    <div class="memory-text">Finding out about our twins - double the love! 👶👶</div>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-date">Everyday Moments</div>
+                    <div class="memory-text">Morning coffee, evening walks, and all the little things ☕</div>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-date">Future Adventures</div>
+                    <div class="memory-text">All the beautiful moments yet to come 🌟</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section quote-section">
+            <h2>💌 A Love Note</h2>
+            <div class="edit-hint">💡 Write your own personal message here</div>
+            <p>You are my sunshine on cloudy days, my peace in the storm, and my greatest adventure. Every day with you is a gift, and I can't wait to see what beautiful chapters we'll write together. You are loved beyond measure. 💖</p>
+        </section>
+    </div>
+
+    <script>
+        // Create floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('heartsContainer').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 2000);
+        
+        // Add some interaction
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.background = 'linear-gradient(135deg, #ffeef8, #e6f3ff)';
+                setTimeout(() => {
+                    this.style.background = 'linear-gradient(135deg, #ffffff, #f8f4ff)';
+                }, 300);
+            });
+        });
+
+        // Add sparkle effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            document.querySelector('.floating-hearts').style.transform = `translateY(${rate}px)`;
+        });
+    </script>
+</body>
+</html>
